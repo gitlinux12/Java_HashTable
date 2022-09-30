@@ -6,17 +6,6 @@ public class LinkedList<Key, Value> {
 	LinkedList(){
 		head = null;
 	}
-	
-	/**
-	 * put data with key value pair to the linked list
-	 * key will be unique in list
-	 * it will check linked list already contains data with key or not 
-	 * if contains then it will update that data otherwise create new data with new key
-	 * data with key value pair will wrap in MyMapNode 
-	 * 
-	 * @param key
-	 * @param value
-	 */
 	public void put(Key key, Value value) {
 		MyMapNode<Key, Value> newNode = new MyMapNode<Key, Value>(key, value);
 		if(isEmpty()) {
@@ -39,13 +28,6 @@ public class LinkedList<Key, Value> {
 		}
 		currentNode.next = newNode;
 	}
-	
-	/**
-	 * check linked list has data with key or not
-	 * 
-	 * @param key
-	 * @return true if contains key otherwise false
-	 */
 	public boolean containsKey(Key key) {
 		if(isEmpty()) return false;
 		if(head.key.equals(key)) return true;
@@ -56,13 +38,6 @@ public class LinkedList<Key, Value> {
 		}
 		return false;
 	}
-	
-	/**
-	 * get value in linked list which has pair with key
-	 * 
-	 * @param key
-	 * @return {@value}
-	 */
 	public Value get(Key key) {
 		if(isEmpty()) return null;
 		if(head.key.equals(key)) return head.value;
@@ -94,12 +69,6 @@ public class LinkedList<Key, Value> {
 	public boolean isEmpty() {
 		return head == null;
 	}
-	
-	/**
-	 * Return how many number of nodes in linked list
-	 * 
-	 * @return count of nodes
-	 */
 	public int size() {
 		int count = 0;
 		MyMapNode<Key, Value> currentNode = head;

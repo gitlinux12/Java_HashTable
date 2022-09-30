@@ -6,9 +6,6 @@ public class HashTable<Key, Value> {
 	LinkedList<Key, Value>[] hashArray;
 	int capacity = 23;
 	
-	/**
-	 * Create Hash Table data structure
-	 */
 	public HashTable() {
 		hashArray = new LinkedList[capacity];
 		for(int index = 0; index < capacity; index++) {
@@ -19,45 +16,17 @@ public class HashTable<Key, Value> {
 	public int hashFunction(Key key) {
 		return (key.hashCode() % capacity) >= 0 ? (key.hashCode() % capacity) : -(key.hashCode() % capacity);
 	}
-	
-	/**
-	 * put data with key value pair to the hash table
-	 * key will be unique in hash table
-	 * it will check hash table already contains data with key or not 
-	 * if contains then it will update that data otherwise create new data with new key
-	 * 
-	 * @param key
-	 * @param value
-	 */
 	public void put(Key key, Value value) {
 		hashArray[hashFunction(key)].put(key, value);
 	}
 	
-	/**
-	 * check hash table has data with key or not
-	 * 
-	 * @param key
-	 * @return true if contains key otherwise false
-	 */
+	
 	public boolean containsKey(Key key) {
 		return hashArray[hashFunction(key)].containsKey(key);
 	}
-	
-	/**
-	 * get value in hash table which has pair with key
-	 * 
-	 * @param key
-	 * @return {@value}
-	 */
 	public Value get(Key key) {
 		return hashArray[hashFunction(key)].get(key);
 	}
-	
-	/**
-	 * take data of each node and wrap it with entry class and return array of entry
-	 * 
-	 * @return entries
-	 */
 	public Entry<Key, Value>[] all() {
 		Entry<Key, Value>[] result = new Entry[size()];
 		int count = 0;
@@ -76,11 +45,6 @@ public class HashTable<Key, Value> {
 		return true;
 	}
 	
-	/**
-	 * Return how many number of nodes in hash table
-	 * 
-	 * @return count of nodes
-	 */
 	public int size() {
 		int count = 0;
 		for(int index = 0; index < capacity; index++) count += hashArray[index].size();
@@ -88,19 +52,18 @@ public class HashTable<Key, Value> {
 	}
 	
 	public static void main(String[] args) {
-		String sentence = "To be or not to be";
+		String sentence = "Paranoids are not paranoid because they are paranoid but because they keep putting themselves deliberately into paranoid avoidable situations";
 		HashTable<String, Integer> frequencyOfWords = new HashTable<String, Integer>();
 		String[] words = sentence.split(" ");
-		// Store frequencies of words into Hash Table data structure 
 		for(String word : words) 
 			if (frequencyOfWords.containsKey(word)) {
 				Integer frequencyOfWord = frequencyOfWords.get(word);
 				frequencyOfWord++;
 				frequencyOfWords.put(word, frequencyOfWord);
 			} else frequencyOfWords.put(word, 1);
-		// Show all words frequencies from Hash Table data structure
 		for(Entry entry : frequencyOfWords.all()) {
-			System.out.println("Frequency of \""+entry.key+"\" in sentence is "+entry.value);
+			if (entry != null)
+				System.out.println("Frequency of \""+entry.key+"\" in sentence is "+entry.value);
 		}	
 	}
 }
